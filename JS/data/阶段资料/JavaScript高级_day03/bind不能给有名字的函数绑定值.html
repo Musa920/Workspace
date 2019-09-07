@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		#boc {
+			width: 80px;
+			height: 80px;
+			background-color: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="boc"></div>
+	<script>
+		var that;
+		var num = 0;
+		boc.onclick = function() {
+			that = this;
+			setInterval(fn, 200)
+		};
+		
+		function fn() {
+			num += 5;
+			that.style.left = num + "px";
+		}.bind(that)
+		// 调用时会报错
+
+
+		// 解决办法
+		/*var that;
+		var num = 0;
+		boc.onclick = function() {
+			that = this;
+			setInterval(fn2, 200)
+		};
+		
+		function fn() {
+			num += 5;
+			that.style.left = num + "px";
+		}
+		var fn2 = fn.bind(that)*/
+
+		/*总结,  一般给匿名函数可以直接在函数后面调用该方法, 如果有名字则需要给名字调用
+		匿名函数可以直接调用此方法, 调用该方法会返回一个新的函数*/
+	</script>
+</body>
+</html>

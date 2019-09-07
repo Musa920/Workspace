@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+  <link rel="stylesheet" href="/node_modules/layui-src/dist/css/layui.css">
+  <script src="/node_modules/layui-src/dist/layui.all.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+  <h1>
+    <a href="#">网址农药</a>
+    <small>编辑英雄</small>
+  </h1>
+  <hr>
+  <form id="form"></form>
+</div>
+
+<script id="tmpl" type="text/template">
+  <input type="hidden" name="id" value="{{id}}">
+  <div class="from-group">
+    <label>名称：</label>
+    <input type="text" name="name" class="form-control" value="{{name}}">
+  </div>
+
+  <div class="from-group mt-2">
+    <label>性别：</label>
+    <label><input type="radio" name="gender" value="男" {{gender == '男' ? 'checked' : ''}}> 男</label>
+    <label><input type="radio" name="gender" value="女" class="ml-2" {{gender == '女' ? 'checked' : ''}}> 女</label>
+  </div>
+
+  <input type="submit" class="btn btn-success btn-sm" value="编辑英雄">
+
+  <a href="/" class="btn btn-info btn-sm">返回首页</a>
+</script>
+
+
+<script>
+  $(function () {
+    // 查询详情
+    const params = new URLSearchParams(location.search);
+    axios(`http://127.0.0.1:5000/api/gethero?id=${params.get('id')}`)
+      .then(data => {
+        if (data.status === 200 && data.data.err_code === 0) {
+          const temp = template('tmpl', data.data.data[0]);
+          $("#form").html(temp);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+    // 编辑操作
+    $('#form').on('submit', function (e) {
+      e.preventDefault();
+
+      axios.post('http://127.0.0.1:5000/api/updatehero', $('form').serialize()).then(res => {
+        if (res.status === 200 && res.data.err_code === 0) {
+          layer.msg(res.data.message);
+          setTimeout(function () {
+            location.href = '/';
+          }, 500);
+        } else {
+          layer.msg(res.data.message);
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    });
+  })
+  ;
+
+</script>
+
+
+</body>
+</html>

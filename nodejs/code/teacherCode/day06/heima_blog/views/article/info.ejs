@@ -1,0 +1,18 @@
+<%- include('../layouts/header.ejs') %>
+
+  <div class="container">
+    <h1>
+      <%= article.title %>
+        <!-- 如果用户没有登录，则不应该显示编辑按钮 -->
+        <% if(islogin && article.authorId == user.id){ %>
+          <a href="/article/edit?id=<%= article.id %>" class="btn btn-info pull-right">编辑</a>
+          <% } %>
+    </h1>
+    <hr>
+
+    <div>
+      <%- article.content %>
+    </div>
+  </div>
+
+  <%- include('../layouts/footer.ejs') %>

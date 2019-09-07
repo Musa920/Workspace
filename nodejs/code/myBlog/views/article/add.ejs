@@ -1,0 +1,49 @@
+<%- include('../layout/header') %>
+
+<link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css">
+<script src="/node_modules/mditor/dist/js/mditor.min.js"></script>
+
+<div class="container">
+    <h1>添加文章页</h1>
+    <hr>
+    <form id="form">
+        <input type="hidden" name="authorId" value="<%= user.id %>">
+        <div class="form-group">
+            <label>标题</label>
+            <input type="text" name="title" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>封面图</label>
+            <input type="text" name="cover" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>内容</label>
+            <textarea name="content" id="editor" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="添加文章" class="btn btn-info pull-right">
+        </div>
+    </form>
+</div>
+
+<script>
+  $(function () {
+    // 初始化一个mditor的富文本编辑器
+    var mditor = Mditor.fromTextarea(document.getElementById('editor'));
+
+    $('#form').on('submit', function (ev) {
+      ev.preventDefault();
+      axios.post('http://127.0.0.1:3000/article/add', $('#form').serialize())
+        .then(({data}) => {
+          if (data.err_code === 0) {
+            layer.msg(data.message);
+            setTimeout(function () {
+              location.href = `/article/info?id=${data.id}`;
+            }, 2000);
+          }
+        })
+    })
+  });
+</script>
+
+<%- include('../layout/footer') %>

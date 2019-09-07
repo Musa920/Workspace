@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <table id="tb"></table>
+
+  <script>
+    let arr = [
+      { id: 1, name: '钢铁侠·托尼·屎大颗', age: 43 },
+      { id: 2, name: '亚历山大·刚刚', age: 18 },
+      { id: 3, name: '亚历山大·小郭子', age: 30 }
+    ]
+
+    // 把上面的 arr 数组，拼接成一个 table ，显示到页面中
+
+    let str = ''
+    for (let i = 0; i < arr.length; i++) {
+      /*  str += '<tr>' +
+         '<td>' + arr[i].id + '</td>' +
+         '<td>' + arr[i].name + '</td>' +
+         '<td>' + arr[i].age + '</td>' +
+         '</tr>' */
+
+      // 模板字符串    ${ JS 表达式 }
+      str += `<tr>
+          <td>${arr[i].id}</td>
+          <td>${arr[i].name}</td>
+          <td>${arr[i].age}</td>
+          </tr>`
+    }
+
+    document.getElementById('tb').innerHTML = str
+  </script>
+</body>
+
+</html>

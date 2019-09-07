@@ -1,0 +1,69 @@
+<%- include('../layouts/header.ejs') %>
+
+  <!-- <link rel="stylesheet" href="/node_modules/mditor/dist/css/mditor.min.css">
+  <script src="/node_modules/mditor/dist/js/mditor.min.js"></script> -->
+
+  <!-- 下面的使用方式，是从远程的 CDN服务器加载包的资源  -->
+  <link rel="stylesheet" href="https://unpkg.com/mditor@1.0.5/dist/css/mditor.min.css" />
+  <script src="https://unpkg.com/mditor@1.0.5/dist/js/mditor.min.js"></script>
+  <!-- 1. 什么是CDN： CDN 是镜像资源加速服务器； -->
+  <!-- 1cpu   1G 内存   1M宽带 -->
+
+  <div class="container">
+    <h1>发表文章页</h1>
+    <hr>
+
+    <form id="form">
+      <input type="hidden" name="authorId" value="<%= user.id %>">
+      <div class="form-group">
+        <label>文章标题：</label>
+        <input type="text" class="form-control" name="title">
+      </div>
+
+      <div class="form-group">
+        <label>文章内容：</label>
+        <textarea name="content" id="editor" class="form-control"></textarea>
+      </div>
+
+      <div class="form-group">
+        <!-- 这里，可以使用 一个 mditor 的第三方模块，来美化 发表文章文本框  -->
+        <input type="submit" value="发表文章" class="btn btn-primary pull-right">
+      </div>
+    </form>
+  </div>
+
+
+  <script>
+    $(function () {
+      // 初始化一个 mditor 的富文本编辑器
+      var mditor = Mditor.fromTextarea(document.getElementById('editor'))
+
+
+      $('#form').on('submit', function (e) {
+        e.preventDefault()
+
+        // 使用 axios 来发起提交文章的Ajax请求
+        /* axios.post('/article/add', $('#form').serialize()).then(result => {
+          if (result.data.err_code === 0) {
+            location.href = '/article/info?id=' + result.data.id
+          } else {
+            alert('发表文章失败！')
+          }
+        }) */
+
+        
+        axios.post('/article/add', $('#form').serialize()).then(({ data }) => {
+          // console.log(result)
+          if (data.err_code === 0) {
+            location.href = '/article/info?id=' + data.id
+          } else {
+            alert('发表文章失败！')
+          }
+        })
+
+
+      })
+    })
+  </script>
+
+  <%- include('../layouts/footer.ejs') %>

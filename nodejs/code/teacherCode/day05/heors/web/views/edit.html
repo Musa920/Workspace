@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+  <!-- 在浏览器端使用 axios 来发起Ajax请求 -->
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      <a href="/">亡者农药</a>
+      <small>编辑新英雄</small>
+    </h1>
+    <hr>
+
+    <form id="form"></form>
+
+  </div>
+
+  <script id="tmpl" type="text/template">
+    <input type="hidden" name="id" value="{{ id }}">
+
+    <div class="form-group">
+        <label>名称：</label>
+        <input type="text" name="name" class="form-control" value="{{ name }}">
+      </div>
+
+      <div class="form-group">
+        <label>性别：</label>
+        <label>
+          <input type="radio" name="gender" value="男" {{ gender=='男' ? 'checked' : '' }}>男</label>
+        <label>
+          <input type="radio" name="gender" value="女" {{ gender=='女' ? 'checked' : '' }}>女</label>
+      </div>
+
+      <input type="submit" value="编辑新英雄" class="btn btn-primary">
+
+  </script>
+
+  <script>
+    $(function () {
+
+      const search = new URLSearchParams(location.search)
+      const id = search.get('id')
+
+      axios.get('http://127.0.0.1:5000/api/gethero?id=' + id).then(results => {
+        if (results.status === 200 && results.data.err_code === 0) {
+          // console.log(results.data.message)
+          const htmlStr = template('tmpl', results.data.message)
+          $('#form').html(htmlStr)
+        } else {
+          alert('获取数据失败')
+        }
+      })
+
+      $('#form').on('submit', function (e) {
+        e.preventDefault()
+
+        axios.post('http://127.0.0.1:5000/api/updatehero', $('#form').serialize()).then(result => {
+          if (result.status === 200 && result.data.err_code === 0) {
+            location.href = '/'
+          } else {
+            alert('修改英雄失败！')
+          }
+        })
+      })
+
+    })
+  </script>
+</body>
+
+</html>

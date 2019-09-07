@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <one></one>
+    <two></two>
+  </div>
+  <script>
+    Vue.filter('fmtTime', (param, seprator) => {
+      const times = new Date(param)
+      let year, month, date, result;
+      year = times.getFullYear()
+      month = (times.getMonth() + 1).toString().padStart(2, '0')
+      date = (times.getDate()).toString().padStart(2, '0')
+      result = year + seprator + month + seprator + date
+      return result
+    })
+
+
+    Vue.component('one', {
+      data() {
+        return {
+          time: new Date()
+        }
+      },
+      template: `
+          <div>
+            <p>{{time | fmtTime('/')}}</p>
+            <input type="text" />
+          </div>
+        `,
+      // filters: {
+      //   fmtTime(param) {
+      //     const times = new Date(param)
+      //     let year, month, date, result;
+      //     year = times.getFullYear()
+      //     month = (times.getMonth() + 1).toString().padStart(2, '0')
+      //     date = (times.getDate()).toString().padStart(2, '0')
+      //     result = year + '/' + month + '/' + date
+      //     return result
+      //   }
+      // }
+    })
+
+    Vue.component('two', {
+      data() {
+        return {
+          time: new Date()
+        }
+      },
+      template: `
+          <div>
+            <p>{{time | fmtTime('/')}}</p>
+            <input type="text" v-myfocus />
+          </div>
+        `,
+      directives: {
+        myfocus: {
+          inserted(el, binding) {
+            el.focus()
+          }
+        }
+      }
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+      },
+      methods: {
+      }
+    })
+  </script>
+</body>
+
+</html>

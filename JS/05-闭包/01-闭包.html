@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*一般的情况下函数执行完后局部作用域会被销毁掉*/
+
+  // function fn() {
+  //   var a = 3;
+  //   return a;
+  // }
+  // fn();
+
+
+  /*出现闭包的情况函数不会被销毁掉，因为将来有人会用它里面局部变量*/
+  function fn() {
+    var a = 5;
+    return function () {
+      return a;
+    }
+  }
+
+  var f = fn();
+  console.log(f());
+
+  /*闭包就是一个作用域里面访问另一个作用域里面的变量*/
+
+</script>
+</body>
+</html>

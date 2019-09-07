@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+
+  /*产生闭包*/
+
+  // var name = 'The window';
+  // var obj = {
+  //   name: 'The object',
+  //   getName: function () {
+  //     var that = this;
+  //     return function () {
+  //       return that.name;
+  //     }
+  //   }
+  // };
+  //
+  // console.log(obj.getName()());
+
+  /*没有产生闭包*/
+
+  var name = 'The window';
+  var obj = {
+    name: 'The object',
+    getName: function () {
+      return function () {
+        return this.name;
+      }.bind(this)
+    }
+  };
+
+  console.log(obj.getName()());
+
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+  * 递归概念：函数调用本身自己
+  * 先提条件：一般都要写一个结束的条件
+  * 报错情况：如果没有写先提条件会报错：超过最大的堆栈大小
+  * */
+
+  /**
+   * n = 3, n + getSum(3 - 1)
+   * n = 2, n + getSum(2 - 1)
+   * n = 1, 1
+   */
+  function getSum(n) {
+    if (n === 1) return 1;
+    return n + getSum(n - 1);
+  }
+
+  console.log(getSum(4));
+
+
+</script>
+</body>
+</html>

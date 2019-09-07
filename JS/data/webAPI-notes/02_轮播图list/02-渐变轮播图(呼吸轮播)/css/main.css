@@ -1,0 +1,86 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,ol {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+#box {
+	width: 680px;
+	height: 453px;
+	margin: 50px auto 0;
+	background-color: #ccc;
+	position: relative;
+	overflow: hidden;
+}
+#slider {
+	height: 100%;
+	position: relative;
+}
+#slider li {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+#slider li a {
+	display: block;
+	height: 100%;
+	background-repeat: no-repeat;
+	background-position: top center;
+}
+#slider li.current {
+	z-index: 1;
+}
+#sliderNO {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	bottom: 10px;
+	z-index: 1;
+}
+#sliderNO li {
+	float: left;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #111;
+	color: #fff;
+	text-align: center;
+	line-height: 20px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+#sliderNO li.current {
+	background-color: yellowgreen;
+}
+#arrow div {
+	width: 50px;
+	text-align: center;
+	background-color: #000;
+	font: 30px/50px "宋体";
+	color: #fff;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 1;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity .3s ease;
+}
+#box:hover #arrow div {
+	opacity: 0.5;
+}
+#box #arrow div:hover {
+	opacity: 0.8;
+}
+#arrow .arrLeft {
+	left: 0;
+}
+#arrow .arrRight {
+	right: 0;
+}

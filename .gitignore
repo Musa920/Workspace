@@ -1,0 +1,11 @@
+config.php
+.idea/
+.vscode/
+storage
+resource/diytpl/
+autoload.php
+index.php
+db/redisDb.php
+typings
+UI
+node_modules

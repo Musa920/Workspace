@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		// Closures
+		// garbage collection  GC
+		// JVM
+
+		// 1.0	理解函数的作用 加了括号才会执行
+		/*(function() {
+			var num = 0;
+			function demo() {
+				num++;
+				console.log(num)
+			}
+			return demo;
+		})()*/
+
+		// 2.0 函数发生调用  看它返回值是什么 有返回值 那么调用结果就等于返回值
+		// 闭包的作用就是在a执行完并返回后，闭包使得Javascript的垃圾回收机制不会收回a所占用的资源，因为a的内部函数b的执行需要依赖a中的变量。
+		// a : 我们不想要全局变量;
+		// b : 在function中的局部变量都会被GC在调用结束之后清除
+		// c : 综上, 我们需要在函数内部保留当前变量, 但是又不希望它是全局的, 所以建立起来了这样一个依赖关系
+		// d : 使用的函数每次执行完都会被回收, 原先的函数也在赋值之后没有被保留
+		// e : 所以, 需要的就是更好的利用内存, 使核心数据变得更加安全
+		/*function a(){
+			var i=0;
+			function b(){
+				console.log(++i);
+				//console.log(this)
+			}
+			return b;
+		}
+		var c = a();
+		c(); // 1
+		c(); // 2*/
+
+		// 3.0	两个闭包	this 指向的是当前这个对象
+		/*function Counter(start){
+			var count = start;
+		　　return {
+			　　increment:function(){
+					console.log(count)
+			　　	count++;
+			　　},
+			　　get:function(){
+					console.log(this)
+			　　	return count;
+			　　}
+		　　}
+		}
+		var foo = Counter(4);
+
+		foo.increment();
+		console.log(foo.get())*/
+
+
+		// 4.0 普通情况, 永远是16
+		function foo(x) {
+		    var tmp = 3;
+		    function bar(y) {
+		        alert(x + y + (++tmp));
+		    }
+		    bar(10);
+		}
+
+		foo(2);
+		foo(2);
+	</script>
+</body>
+</html>

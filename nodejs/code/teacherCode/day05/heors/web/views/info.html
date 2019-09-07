@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+  <!-- 在浏览器端使用 axios 来发起Ajax请求 -->
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1><a href="/">亡者农药</a>
+      <small>查看英雄信息</small>
+    </h1>
+    <hr>
+
+    <div id="info"></div>
+
+  </div>
+
+  <!-- 定义模板标签 -->
+  <script id="tmpl" type="text/template">
+    <p><strong>Id：{{ id }}</strong></p>
+    <p><strong>姓名：{{ name }}</strong></p>
+    <p><strong>性别：{{ gender }}</strong></p>
+    <p><strong>创建时间：{{ ctime }}</strong></p>
+  </script>
+
+  <script>
+    $(function () {
+
+      // 1. 先从URL地址中，获取到英雄的ID
+      const search = new URLSearchParams(location.search)
+      const id = search.get('id')
+      // console.log(location)
+      // 2. 根据Id，调用axios.get 获取到英雄数据
+      axios.get('http://127.0.0.1:5000/api/gethero?id=' + id).then(results => {
+        if (results.status == 200 && results.data.err_code === 0) {
+          const htmlStr = template('tmpl', results.data.message)
+          $('#info').html(htmlStr)
+        } else {
+          alert('获取英雄失败！')
+        }
+      })
+      // 3. 调用art-template 模板引擎，渲染数据到页面中
+
+    })
+  </script>
+</body>
+
+</html>

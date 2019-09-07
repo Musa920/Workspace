@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let str = '张三：7000， 李四：8500，王四：9500';
+  let reg = /\d+/g;
+  let content;
+  do {
+    content = reg.exec(str); //exec提取一个内容
+    if (content) console.log(content[0]);
+  } while (content);
+
+</script>
+</body>
+</html>

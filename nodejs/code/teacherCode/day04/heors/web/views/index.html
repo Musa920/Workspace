@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+
+  <script id="tmpl" type="text/template">
+    {{ each message }}
+    <tr>
+      <td>{{ $value.id }}</td>
+      <td>{{ $value.name }}</td>
+      <td>{{ $value.gender }}</td>
+      <td>{{ $value.ctime }}</td>
+      <td>
+        <a href="#">查看</a>
+        <a href="#">编辑</a>
+        <a href="#">删除</a>
+      </td>
+    </tr>
+    {{ /each }}
+  </script>
+
+  <script>
+    $(function () {
+      $.ajax({
+        url: 'http://127.0.0.1:5000/api/getheros',
+        type: 'get',
+        dataType: 'json',
+        success: function (data) {
+          const htmlStr = template('tmpl', data)
+          $('tbody').html(htmlStr)
+        }
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>亡者农药
+      <small>英雄管理器</small>
+    </h1>
+    <hr>
+
+    <div class="clearfix">
+      <a href="#" class="btn btn-success pull-right">添加新英雄</a>
+    </div>
+
+    <table class="table table-striped">
+
+      <thead>
+        <tr>
+          <th>编号</th>
+          <th>名称</th>
+          <th>性别</th>
+          <th>创建时间</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+</body>
+
+</html>

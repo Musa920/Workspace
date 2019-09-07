@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="firstName">
+    <input type="text" v-model="lastName">
+    <h3>全名:{{fullName}}</h3>
+    <h1>watch</h1>
+    <h3>全名:{{endName}}</h3>
+  </div>
+  <script>
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        firstName: '',
+        lastName: '',
+        endName: ''
+      },
+      computed: {
+        fullName() {
+          return `${this.firstName}${this.lastName}`
+        }
+      },
+      watch: {
+        firstName(newVal, oldVal) {
+          this.endName = newVal + this.lastName
+        },
+        lastName(newVal, oldVal) {
+          this.endName = this.firstName + newVal
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

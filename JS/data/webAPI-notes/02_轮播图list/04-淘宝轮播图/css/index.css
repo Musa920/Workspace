@@ -1,0 +1,82 @@
+/*
+* @Author: moon
+* @Date:   2017-11-04 03:09:22
+* @Last Modified by:   moon
+* @Last Modified time: 2017-11-04 03:09:22
+*/
+
+@import url(base.css);
+
+
+#container {
+	width: 520px;
+	margin: 50px auto;
+	position: relative;
+	overflow: hidden;
+}
+
+#container #pageLeft,
+#container #pageRight {
+	width: 20px;
+	height: 30px;
+	background-color: rgba(0, 0, 0, .2);
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+	text-decoration: none;
+	color: #f8f8f8;
+	line-height: 30px;
+	text-align: center;
+	font-family: "simsun";
+	font-weight: 700;
+	display: none;
+}
+#container #pageLeft {
+	left: 0px;
+	border-radius: 0 15px 15px 0;
+	text-indent: -3px;
+}
+#container #pageRight {
+	right: 0px;
+	border-radius: 15px 0 0 15px;
+	text-indent: 3px;
+}
+#container #pageLeft:hover,
+#container #pageRight:hover {
+	color: #dedede;
+	background-color: rgba(0, 0, 0, .4);
+}
+
+#container ul {
+	transition: transform .2s ease-in; 
+}
+#container ul li {
+	float: left;
+}
+
+#container ol {
+	padding: 0;
+	width: 70px;
+	height: 12px;
+	position: absolute;
+	left: 50%;
+	bottom: 6px;
+	transform: translateX(-50%);
+	background-color: rgba(255, 255, 255, .5);
+	border-radius: 6px;
+}
+
+#container ol li {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background-color: #fff;
+	float: left;
+	margin: 2px 3px;
+	cursor: pointer;
+}
+
+#container ol li.cur {
+	background-color: #f40;
+}

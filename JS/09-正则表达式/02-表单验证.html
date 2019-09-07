@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+QQ号：<input type="text" id="txtQQ"><span></span><br>
+邮箱：<input type="text" id="txtEMail"><span></span><br>
+手机：<input type="text" id="txtPhone"><span></span><br>
+生日：<input type="text" id="txtBirthday"><span></span><br>
+姓名：<input type="text" id="txtName"><span></span><br>
+
+<script>
+  // 获取对应的ID
+  let txtQQ = document.getElementById('txtQQ');
+  let txtEMail = document.getElementById('txtEMail');
+  let txtPhone = document.getElementById('txtPhone');
+  let txtBirthday = document.getElementById('txtBirthday');
+  let txtName = document.getElementById('txtName');
+
+  formValidation(txtQQ, /^[1-9]\d{4,12}$/, '请输入正确的QQ号码');
+  formValidation(txtEMail, /^\w+@\w+(\.\w+)+$/, '请输入正确的Email地址');
+  formValidation(txtPhone, /^[1-9]\d{10}$/, '请输入正确的手机号码');
+  formValidation(txtBirthday, /^\d{4}[-/]\d{1,2}[-/]\d{1,2}$/, '请输入正确的日期');
+  formValidation(txtName, /^[\u4e00-\u9fa5]{2,4}$/, '请输入正确的姓名');
+
+  /**
+   * 表单验证
+   * @param element 对应的元素ID
+   * @param reg 对应的验证正则
+   * @param tip 对应的提示语句
+   */
+  function formValidation(element, reg, tip) {
+    element.onblur = function () {
+      let span = this.nextElementSibling;
+      if (!reg.test(this.value)) {
+        span.innerText = tip;
+        span.style.color = 'red';
+      } else {
+        span.innerText = '';
+        span.style.color = '';
+      }
+    };
+  }
+
+</script>
+
+</body>
+</html>

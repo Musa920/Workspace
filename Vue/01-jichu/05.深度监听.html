@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" v-model="user.name">
+  </div>
+  <script>
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        user: {
+          name: 'jack'
+        }
+      },
+      watch: {
+        user: {
+          handler(newVal) {
+            console.log(newVal.name)
+          },
+          deep: true
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			padding: 50px;
+		}
+		ul, ol {
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+			font-size: 16px;
+			color: #333;
+		}
+		h4 {
+			font-weight: normal;
+		}
+		.content {
+			width: 260px;
+			background-color: #f9f9f9;
+			overflow: hidden;
+		}
+		.content-top {
+			overflow: hidden;
+		}
+		.content-top h4 {
+			float: left;
+			margin: 20px 0;
+		}
+		.link {
+			float: right;
+			margin: 20px 0;
+			font-size: 12px;
+			color: #999;
+		}
+		a.link:hover {
+			text-decoration: underline;
+		}
+
+		.banner {
+			height: 140px;
+			position: relative;
+		}
+		.content-bottom ul {
+			width: 600%;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
+		.content-bottom ul li {
+			float: left;
+		}
+		.words {
+			position: relative;
+		}
+		.words h4 {
+			margin: 10px 0;
+		}
+		.words h4 a {
+			color: #333;
+		}
+		.words h4 a:hover {
+			color: #ff9d00;
+			text-decoration: underline;
+		}
+		.words p {
+			font-size: 14px;
+			color: #666;
+		}
+		ol {
+			width: 90px;
+			height: 8px;
+			position: absolute;
+			bottom: 10px;
+			right: 10px;
+			z-index: 3;
+		}
+		ol li {	
+			float: left;
+			width: 15px;
+			height: 8px;
+			background-color: white;
+			margin-right: 3px;
+			border-radius: 8px;
+		}
+		ol li.current {
+			background-color: #ff9d00;
+		}
+	</style>
+</head>
+<body>
+	<div class="content" id="box">
+		<div class="content-top">
+			<h4><a href="#">旅行家专栏</a></h4>
+			<a href="#" class="link">专栏首页</a>
+		</div>
+		<div class="content-bottom">
+			<div class="banner">
+				<ul>
+					<li><img src="images/01.jpg" alt=""></li>
+					<li><img src="images/02.jpg" alt=""></li>
+					<li><img src="images/03.jpg" alt=""></li>
+					<li><img src="images/04.jpg" alt=""></li>
+					<li><img src="images/05.jpg" alt=""></li>
+				</ul>
+				<ol></ol>
+			</div>
+			
+			<div class="words" id="words">
+				<h4><a href="#">渐东的古迹</a></h4>
+				<p>只记得该教堂好像始建于明代，后来屡变用途，塌了三次，重建了三次。</p>
+			</div>
+		</div>
+	</div>
+	<script>
+		// 假数据
+		var datas = [
+			{
+				"title" : "渐东的古迹",
+				"words" : "只记得该教堂好像始建于明代，后来屡变用途，塌了三次，重建了三次。"
+			},{
+				"title" : "法南的夏日",
+				"words" : "我们坐在海边，依次打开剩下的三个海胆，听着海浪，吹着海风，以最原始的方式品尝了大海馈赠的礼物。"
+			},{
+				"title" : "苏格兰高地的一个晴天",
+				"words" : "“其实我也害怕，但结束这次旅程后，我要改掉自己的名字。”"
+			},{
+				"title" : "巴厘岛上的理想国",
+				"words" : "我们都曾企图在街头运动中改变世界，而后都将这腔热情转到从小事情开始，从一块土地开始，彼此心照不宣。"
+			},{
+				"title" : "东北的野菜",
+				"words" : "来到辽宁不过几天，就觉得自己已然变成遍尝百草的神农。"
+			},
+		]
+
+		var timer = null;
+		var box = document.getElementById("box");
+		var banner = box.children[1].children[0];
+		var ul = banner.children[0];
+		var ol = banner.children[1];
+		var ulList = ul.children;
+		//设置内容的盒子
+		var words = document.getElementById("words");
+		var wordsTitle = words.getElementsByTagName("a")[0];
+		var wordsPra = words.getElementsByTagName("p")[0];
+		// 获取图片宽度
+		var imgWidth = banner.offsetWidth;
+
+		
+		//  1.1 遍历生成ol盒子
+		for(var i = 0; i < ulList.length; i++) {
+			var li = document.createElement("li");
+			ol.appendChild(li);
+		}
+		ol.children[0].className = "current";
+		// 1.2 复制第一张图片到结构的最后面
+		var firstImg = ulList[0].cloneNode(true);
+    	ul.appendChild(firstImg);
+
+
+		// 2. 按钮排他控制图片走动
+		var olLis = ol.children;
+		for(var i = 0; i < olLis.length; i++) {
+			olLis[i].index = i;
+			olLis[i].onclick = function() {
+				// 2.1 干掉所有人
+				for(var j = 0; j < olLis.length; j++) {
+					olLis[j].className = "";
+				}
+				// 2.2 留下自己
+				olLis[this.index].className = "current";
+				// 2.3 发生位移
+				var target = -this.index * imgWidth;
+				animate(ul, target)
+				// 2.4 设置内容
+				wordsTitle.innerHTML = datas[this.index].title;
+				wordsPra.innerHTML = datas[this.index].words;
+				// 2.5 统一索引
+				pic = this.index;
+				squ = this.index;
+			}
+		}
+
+
+
+
+
+		// 3. 自动轮播
+		var pic = 0; // 图片索引
+		var squ = 0; // 按钮索引
+		function autoPlay() {
+			// 3.1 如果pic等于olist, 也就是5的时候, 先闪现到第一张, pic清零
+			if(pic === olLis.length) {
+				ul.style.left = "0px";
+				pic = 0;
+			}
+			pic++;
+			var target = -pic * imgWidth;
+			animate(ul, target);
+			
+			// 3.2 当按钮squ等于4的时候, squ等于-1再自加
+			if(squ === olLis.length - 1) {
+				squ = -1;
+			}
+			squ++;
+			console.log(squ);
+			for(var i = 0; i < olLis.length; i++) {
+				olLis[i].className = "";
+			}
+			olLis[squ].className = "current";
+			// 3.3 设置内容
+			wordsTitle.innerHTML = datas[squ].title;
+			wordsPra.innerHTML = datas[squ].words;
+		}
+
+		// 4. 设置自动轮播
+		timer = setInterval(autoPlay, 5000);
+		// 4.1 鼠标移上盒子，停止轮播
+		box.onmouseover = function() {
+			clearInterval(timer);
+		};
+		box.onmouseout = function() {
+			timer = setInterval(autoPlay, 5000);
+		}
+
+
+	// 封装的animate函数
+	function animate(obj, target) {
+        clearInterval(obj.timer);
+        obj.timer = setInterval(function () {
+            var leader = obj.offsetLeft;
+            var step = 30;
+            step = leader < target ? step : -step;//step有了正负
+            if (Math.abs(leader - target) >= Math.abs(step)) {
+                leader = leader + step;
+                obj.style.left = leader + "px";
+            } else {
+                obj.style.left = target + "px";//手动放到终点
+                clearInterval(obj.timer);
+            }
+        }, 15);
+    }
+	</script>
+</body>
+</html>

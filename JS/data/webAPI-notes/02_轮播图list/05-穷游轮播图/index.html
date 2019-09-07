@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<title>全屏轮播</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			min-width: 900px;
+		}
+		#banner {
+			position: relative;
+			height: 454px;
+		}
+		ul {
+			list-style: none;
+			height: 100%;
+			overflow: hidden;
+			position: relative;
+		}
+		ul li {
+			width: 100%;
+			height: 100%;
+			/* background: url(images/01.jpg) no-repeat center 55%; */
+			/* background-size: cover; */
+			display: none;
+			position: absolute;
+			top: 0;
+		}
+		ul li img {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+		}
+		.current {
+			z-index: 1;
+			display: block;
+		}
+		#clickLeft,#clickRight {
+			width: 35px;
+			background-color: rgba(0, 0, 0, .3);
+			font-family: consolas;
+			font-size: 30px;
+			text-decoration: none;
+			color: #ccc;
+			text-align: center;
+			line-height: 60px;
+			position: absolute;
+			top: 50%;
+			margin-top: -30px;
+			z-index: 2;
+			display: none;
+		}
+		#clickLeft {
+			left: 0;
+		}
+		#clickRight {
+			right: 0;
+		}
+	</style>
+	<script src="js/jquery-1.12.2.min.js"></script>
+	<script src="js/index.js"></script>
+</head>
+<body>
+<div id="banner">
+	<ul id="bannerList"></ul>
+	<a href="javascript:;" id="clickLeft">&lt;</a>
+	<a href="javascript:;" id="clickRight">&gt;</a>
+</div>
+</body>
+</html>

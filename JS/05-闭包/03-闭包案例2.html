@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  console.log(1);
+
+  for (var i = 0; i < 3; i++) {
+    (function (i) {
+      setTimeout(function () {
+        console.log(i);
+      }, 0);
+    })(i);
+  }
+
+  console.log(3);
+
+</script>
+</body>
+</html>

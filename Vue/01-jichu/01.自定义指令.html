@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <style>
+    #app {
+      width: 600px;
+      margin: 10px auto;
+    }
+
+    .tb {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    .tb th {
+      background-color: #0094ff;
+      color: white;
+    }
+
+    .tb td,
+    .tb th {
+      padding: 5px;
+      border: 1px solid black;
+      text-align: center;
+    }
+
+    .add {
+      padding: 5px;
+      border: 1px solid black;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+
+<body>
+    <div id="app">
+      <div class="add">
+         编号:<input type="text" v-model="newData.id" ref="bianhao" v-myfocus>
+         品牌名称:<input type="text" v-model="newData.name" v-mycolor="color">
+          <input type="button" value="添加" @click="addData">
+        </div>
+      <div class="add">
+         品牌名称:<input type="text" placeholder="请输入搜索条件">
+        </div>
+      <div>
+          <table class="tb">
+              <tr>
+                  <th>编号</th>
+                  <th>品牌名称</th>
+                  <th>创立时间</th>
+                  <th>操作</th>
+                </tr>
+        <tr v-for="(item, index) in list" :key="index">
+          <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.ctime}}</td>
+                  <td>
+            <a href="#" @click="deleteData(index)">删除</a>
+          </td>
+        </tr>
+              <tr v-if="!list.length">
+                  <td colspan="4">没有品牌数据</td>
+                </tr>
+            
+      </table>
+        </div>
+      </div>
+    </body>
+
+<script>
+  Vue.directive('myfocus', {
+    inserted(el, binding) {
+      el.focus() 
+    }
+  })
+
+  Vue.directive('mycolor', {
+    inserted(el, binding) {
+      el.style.color = binding.value
+    }
+  })
+
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      color: 'red',
+      newData: {
+        id: '',
+        name: ''
+      },
+      list: [
+        {
+          id: 1,
+          name: 'LV',
+          ctime: new Date()
+        },
+        {
+          id: 2,
+          name: 'LG',
+          ctime: new Date()
+        },
+        {
+          id: 3,
+          name: 'SONY',
+          ctime: new Date()
+        }
+      ]
+    },
+    mounted() {
+      // console.log(this.$refs)
+      // this.$refs.bianhao.focus()
+    },
+    methods: {
+      deleteData(i) {
+        this.list.splice(i, 1)
+      },
+      addData() {
+        this.list.push({
+          id: this.newData.id,
+          name: this.newData.name,
+          ctime: new Date()
+        })
+      }
+    }
+  })
+
+</script>
+
+
+</html>

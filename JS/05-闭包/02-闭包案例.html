@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="meals">
+  <li>包子</li>
+  <li>拌面</li>
+  <li>饺子</li>
+  <li>抓饭</li>
+</ul>
+
+<script>
+  /*使用ES6语法*/
+
+  // let meals = document.getElementById('meals');
+  // let list = meals.children;
+  // for (let i = 0; i < list.length; i++) {
+  //   let li = list[i];
+  //   li.onclick = function () {
+  //     console.log(i);
+  //   }
+  // }
+
+  /*不使用ES6语法,使用闭包*/
+  // var meals = document.getElementById('meals');
+  // var list = meals.children;
+  // for (var i = 0; i < list.length; i++) {
+  //   var li = list[i];
+  //   (function (i) {
+  //     li.onclick = function () {
+  //       console.log(i);
+  //     }
+  //   })(i);
+  // }
+
+  /*给对象增加属性的方式*/
+  var meals = document.getElementById('meals');
+  var list = meals.children;
+  for (var i = 0; i < list.length; i++) {
+    var li = list[i];
+    li.index = i;
+    li.onclick = function () {
+      console.log(this.index);
+    }
+  }
+
+</script>
+</body>
+</html>

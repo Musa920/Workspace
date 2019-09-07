@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="/node_modules/art-template/lib/template-web.js"></script>
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<div class="container mt-4">
+  <h1>
+    <a href="/">网址农药</a>
+    <small>添加新英雄</small>
+  </h1>
+  <hr>
+  <div id="info"></div>
+</div>
+
+<script id="tmpl" type="text/template">
+  <p>编号：{{id}}</p>
+  <p>名称：{{name}}</p>
+  <p>性别：{{gender}}</p>
+  <p>创建时间：{{ctime}}</p>
+</script>
+
+<script>
+  $(function () {
+    const params = new URLSearchParams(location.search);
+    axios(`http://127.0.0.1:5000/api/gethero?id=${params.get('id')}`)
+      .then(data => {
+        if (data.status === 200 && data.data.err_code === 0) {
+          const temp = template('tmpl', data.data.data[0]);
+          $("#info").html(temp);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  })
+
+
+</script>
+</body>
+</html>

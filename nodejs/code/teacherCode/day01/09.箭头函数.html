@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <input type="button" value="戳它" id="btn">
+
+  <script>
+
+    /* document.getElementById('btn').onclick = function () {
+      var _this = this
+      setTimeout(function () {
+        _this.style.backgroundColor = 'red'
+      }, 1000)
+    } */
+
+
+    var add = () => {
+      console.log('this is add func')
+    }
+
+
+
+    document.getElementById('btn').onclick = function () {
+      // 箭头函数内部的 this, 永远和 箭头函数外部的 this 保持一致；
+      setTimeout(() => {
+        this.style.backgroundColor = 'red'
+      }, 1000)
+    }
+
+
+    var add2 = (x, y) => x + y
+
+
+    const result = add2(6, 2)
+    console.log(result)
+
+  </script>
+</body>
+
+</html>

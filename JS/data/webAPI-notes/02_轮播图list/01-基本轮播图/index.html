@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		ul , ol
+		{
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+			color: #ccc;
+		}
+		.clearfix::before, .clearfix::after {
+			content: "";
+			display: block;
+			height: 0;
+			line-height: 0;
+			visibility: hidden;
+			clear: both;
+		}
+		.clearfix {
+			*zoom: 1;
+		}
+		.container img {
+			width: 700px;
+		}
+
+		.container {
+			width: 700px;	
+			height: 470px;
+			background-color: #e4e4e4;
+			margin: 50px auto;
+			position: relative;
+			overflow: hidden;
+		}
+		.arr {
+			display: none;
+		}
+		#arrLeft, #arrRight {
+			position: absolute;
+			width: 40px;
+			height: 60px;
+			background-color: rgba(0, 0, 0, .6);
+			font-size: 26px;
+			font-family: simsun;
+			top: 50%;
+			transform: translateY(-50%);
+			text-align: center;
+			line-height: 60px;
+			border-radius: 2px;
+			z-index: 999;
+		}
+		#arrLeft {
+			left: 10px;
+		}
+		#arrRight {
+			right: 10px;
+		}
+		.container ul {
+			width: 5000px;
+			position: absolute;
+		}
+		.container ul li {
+			float: left;
+		}
+		.container ol {
+			position: absolute;
+			width: 210px;
+			height: 25px;
+			right: 10px;
+			bottom: 10px;
+
+		}
+		.container ol li {
+			width: 25px;
+			height: 25px;
+			background-color: #ccc;
+			float: left;
+			margin: 0 5px;
+			text-align: center;
+			line-height: 25px;
+			color: #000;
+			font-size: 14px;
+			border-radius: 50%;
+			cursor: pointer;
+
+			-webkit-touch-callout: none; /* iOS Safari */
+			-webkit-user-select: none; /* Chrome/Safari/Opera */
+			-khtml-user-select: none; /* Konqueror */
+			-moz-user-select: none; /* Firefox */
+			-ms-user-select: none; /* Internet Explorer/Edge */
+			user-select: none; /* Non-prefixed version, currently
+			not supported by any browser */
+		}
+		.container ol li.current {
+			color: #fff;
+			background-color: greenyellow;
+		}
+	</style>
+	<script src="./js/animate.js"></script>
+	<script src="./js/index.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div class="arr">
+			<a href="javascript:;" id="arrLeft">&lt;</a>
+			<a href="javascript:;" id="arrRight">&gt;</a>
+		</div>
+		<ul class="clearfix">
+			<li><a href="javascript:;"><img src="./images/pic-01.jpg" alt=""></a></li>
+			<li><a href="javascript:;"><img src="./images/pic-02.jpg" alt=""></a></li>
+			<li><a href="javascript:;"><img src="./images/pic-03.jpg" alt=""></a></li>
+			<li><a href="javascript:;"><img src="./images/pic-04.jpg" alt=""></a></li>
+			<li><a href="javascript:;"><img src="./images/pic-05.jpg" alt=""></a></li>
+			<li><a href="javascript:;"><img src="./images/pic-06.jpg" alt=""></a></li>
+		</ul>
+		<ol></ol>
+	</div>
+</body>
+</html>

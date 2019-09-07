@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			font-family: Arail ,"simsun" ,"Microsoft Yahei";
+		}
+		ul {
+			list-style: none;
+		}
+		a {
+			text-decoration: none;
+			color: #ccc;
+		}
+		label {
+			cursor: pointer;
+		}
+		form {
+			width: 500px;
+			margin: 20px auto;
+			background-color: #f8f8f8;
+			padding: 20px;
+			box-sizing: border-box;
+			border: 1px solid deepskyblue;
+		}
+		input {
+			border: none;
+			background: none;
+			outline: none;
+			display: block;
+			width: 100%;
+			height: 40px;
+			line-height: 40px;
+			font-size: 22px;
+			padding-left: 10px;
+			margin: 10px 0;
+			border: 1px solid #ccc;
+			background-color: #fff;
+			border-radius: 5px;
+			box-sizing: border-box;
+		}
+		input.current {
+			border: 1px solid red;
+		}
+		#register ul li {
+			padding-left: 20px;
+			margin: 20px 0;
+			position: relative;
+		}
+		#register ul li span {
+			position: absolute;
+			top: 40px;
+			right: 10px;
+			color:  red;
+			font-size: 12px;
+			display: none;
+			z-index: 2;
+		}
+		#register ul li i {
+			font-style: normal;
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			background: url('./images/checked.png') no-repeat;
+			-webkit-background-size: cover;
+			background-size: cover;
+			margin-left: -20px;
+			opacity: 0;
+		}
+		#register ul li:last-child {
+			margin-top: 50px;
+			display: flex;
+		}
+		li:last-child input {
+			width: 30%;
+			margin: 0 auto;
+			background-color: #2196f3;
+			border: 1px solid #00bcd4;
+			color: #fff;
+			font-size: 18px;
+			cursor: pointer;
+		}
+		li:last-child input:last-child {
+			background-color: #607d8b;
+			border: 1px solid #9e9e9e;
+		}
+		li:nth-last-of-type(2) {
+			position: relative;
+		}
+		li:nth-last-of-type(2) input {
+			width: 50%;
+		}
+		#register ul li:nth-last-of-type(2) span {
+			right: 230px;
+		}
+		li:nth-last-of-type(2) #yanzhengma {
+			border: none;
+			outline: none;
+			background: none;
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			width: 35%;
+			height: 40px;
+			line-height: 40px;
+			font-size: 18px;
+			color: #fff;
+			background-color: #2196f3;
+			border: 1px solid #00bcd4;
+			border-radius: 5px;
+			cursor: pointer;
+			margin: 0;
+		}
+		li:nth-last-of-type(2) #yanzhengma.cur {
+			color: #fff;
+			background-color: #607d8b;
+			border: 1px solid #9e9e9e;
+		}
+		#strange {
+			width: 95.5%;
+			height: 40px;
+			background-color: #fff;
+			border-radius: 5px;
+			box-sizing: border-box;
+			position: absolute;
+			bottom: -10px;
+			right: 0;
+			margin: 10px 0;
+		}
+		#register ul li:nth-of-type(2) input {
+			background: none;
+			position: relative;
+			z-index: 1;
+		}
+	</style>
+	<script src="js/index.js"></script>
+</head>
+<body>
+	<form action="./test.php" id="register">
+		<ul>
+			<li>
+				<i id="imgTips"></i>
+				<label for="userName">用户名:</label>
+				<input type="text" id="userName" data-input="element">
+				<span>* 请输入正确的格式</span>
+			</li>
+			<li>
+				<i id="imgTips"></i>
+				<label for="pwd">密  码:</label>
+				<input type="password" id="pwd"  data-input="element">
+				<span>* 密码长度太短了哟！</span>
+				<div id="strange"></div>
+			</li>
+			<li>
+				<i id="imgTips"></i>
+				<label for="eMail">邮  箱:</label>
+				<input type="text" id="eMail"  data-input="element">
+				<span>* 请输入正确的格式</span>
+			</li>
+			<li>
+				<i id="imgTips"></i>
+				<label for="phoneNum">手机号:</label>
+				<input type="text" id="phoneNum"  data-input="element">
+				<span>* 请输入正确的格式</span>
+			</li>
+			<li>
+				<i id="imgTips"></i>
+				<label for="promise">验证码:</label>
+				<input type="text" id="promise"  data-input="element">
+				<!-- <button id="yanzhengma">发送验证码</button> -->
+				<input type="button" value="发送验证码" id="yanzhengma">
+				<span>* 验证码错误</span>
+			</li>
+			<li>
+				<input type="submit" value="确认注册" id="submitB">
+				<input type="reset" value="取  消" id="submitA">
+			</li>
+		</ul>
+	</form>
+</body>
+</html>

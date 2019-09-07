@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <ul>
+      <li @click="currentActive = 'index'"><a href="#">首页</a></li>
+      <li @click="currentActive = 'movie'"><a href="#">电影</a></li>
+      <li @click="currentActive = 'music'"><a href="#">音乐</a></li>
+      <li @click="currentActive = 'download'"><a href="#">下载</a></li>
+    </ul>
+    <component :is="currentActive"></component>
+  </div>
+
+  <script>
+    Vue.component('index', {
+      template: `
+        <h1>这是首页</h1>
+      `
+    })
+
+    Vue.component('movie', {
+      template: `
+        <h1>这是电影</h1>
+      `
+    })
+
+    Vue.component('music', {
+      template: `
+        <h1>这是音乐</h1>
+      `
+    })
+
+    Vue.component('download', {
+      template: `
+        <h1>这是下载</h1>
+      `
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        currentActive: 'index'
+      }
+    })
+  </script>
+</body>
+
+</html>

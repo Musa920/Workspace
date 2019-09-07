@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<style type="text/css">
+    body {
+        background: #ccc;
+    }
+
+    label {
+        width: 100px;
+        display: inline-block;
+    }
+
+    span {
+        color: red;
+    }
+
+    .container {
+        margin: 100px auto;
+        width: 400px;
+        padding: 50px;
+        line-height: 40px;
+        border: 1px solid #999;
+        background: #efefef;
+    }
+
+    span {
+        margin-left: 30px;
+        font-size: 12px;
+    }
+
+    .wrong {
+        color: red
+    }
+
+    .right {
+        color: green;
+    }
+
+    .defau {
+        width: 200px;
+        height: 20px;
+    }
+
+    .de1 {
+        background-position: 0 -20px;
+    }
+</style>
+<body>
+<div class="container">
+    <label>输入不能为空</label><input type="text" id="inp1" spellcheck="false"><span></span><br/>
+
+    <script>
+        var inp1 = document.getElementById("inp1");
+        var span1 = inp1.nextElementSibling;
+
+        inp1.onblur = function() {
+            if(this.value.trim() == "") {
+                span1.innerText = "输入不能为空";
+                this.value = ""
+            }else {
+                span1.innerText = ""
+                this.value = this.value.replace(/\s/g, "")
+            }
+        }
+    </script>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  // 3. 分组提取
+  // 3. 提取日期中的年部分  2015-5-10
+  let dateStr = '2015-1-5';
+  let reg = /([1-9]\d{3})[-/](\d{1,2})[-/](\d{1,2})/g;
+  // var reg = /(\d{4})-(\d{1,2})-(\d{1,2})/;
+  reg.exec(dateStr);
+  console.log(RegExp.$1);
+  console.log(RegExp.$2);
+  console.log(RegExp.$3);
+
+
+
+</script>
+</body>
+</html>

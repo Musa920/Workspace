@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		
+		// 1.0 javascript所有的  函数  都有prototype属性
+		// 因为在JS中, 没有类的概念, 你无法得知你使用的js是哪里来的
+		// 虽然这个概念bug在ES6中解决了, 有了类模块, 但是我们还是可以去使用
+		
+		/*function F(){
+		　　conosle.log("asd")
+		};
+		console.log(F.prototype instanceof Object) //true*/
+
+		// 2.0 类的实例对象的constructor属性永远指向"构造函数"的prototype.constructor
+		function A(x){
+		　　this.x=x;
+		}
+		var obj=new A(1);
+		/*console.log(obj.constructor) 
+		console.log(obj.__proto__) */
+		console.log(A.prototype) 
+
+		// 名词解释
+		// 1.0 constructor 构造器 
+		// obj.constructor  对象使用构造器能够查看是由谁创建的自己
+		// 
+		// 2.0 instanceof 
+		// 运算符 指出对象是否是特定类的一个实例
+		// 
+		// 3.0 prototype	显示的原型
+		// 该属性指向的是这个对象的原型
+		// 
+		// 4.0 obj.__proto__ 隐藏的原型
+		// 
+		// 
+		// 使用原型的目的就是为了方便共享和继承其中的方法
+		// 每次在书写新功能的时候都会有个指针指向了构造函数
+		// 
+		// 1, 方便管理 使页面功能都有所归属
+		// 
+		// 2, 实例可以单独去写一些方法, 但是另外的实例里面的方法用不了别人的方法
+		// 	  原型的出现就是为了更好的继承
+		// 	  
+		// 	  
+		// 	  
+		// 	  
+		// 怎么去抽象类 ?
+
+		
+	</script>
+</body>
+</html>

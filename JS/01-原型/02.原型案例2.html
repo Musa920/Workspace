@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  function Person(name, age, sex) {
+    this.name = name;
+    this.age = age;
+    this.sex = sex;
+  }
+
+  Person.prototype = {
+    constructor: Person,
+    sayHi() {
+      console.log(this.name + '的年龄：' + this.age);
+    },
+    eat() {
+      console.log(this.name + '的性别为：' + this.sex);
+    }
+  };
+
+  let p1 = new Person('jack', 26, 'man');
+  let p2 = new Person('jeskson', 30, 'women');
+
+  p1.sayHi();
+  p2.sayHi();
+  console.log("-------------");
+  p1.eat();
+  p2.eat();
+
+  console.dir(Person.prototype);
+  console.dir(p1.constructor)
+</script>
+</body>
+</html>

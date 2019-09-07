@@ -1,0 +1,76 @@
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+ul,ol {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #666;
+}
+a:hover {
+	color: #ccc;
+}
+
+.clearfix::before, .clearfix::after {
+	content: "";
+	display: block;
+	height: 0;
+	line-height: 0;
+	visibility: hidden;
+	clear: both;
+}
+.clearfix {
+	*zoom: 1;
+}
+
+/* ------------------------------- */
+
+.container {
+	width: 430px;
+	position: relative;
+	margin: 50px 0 0 50px;
+}
+.container .small-img > img {
+	width: 430px;
+}
+
+.container ul {
+	margin-top: 10px;
+}
+
+.container ul li {
+	float: left;
+	margin: 0 10px;
+	box-shadow: 2px 2px 5px #ccc;
+	border: 2px solid transparent;
+	box-sizing: border-box;
+}
+
+.container .mask {
+	width: 220px;
+	height: 220px;
+	background: url("../images/move-bg.png");
+	position: absolute;
+	top: 0;
+	left: 0;
+	cursor: move;
+	display: none;
+}
+
+.container .big-img {
+	width: 400px;
+	height: 400px;
+	overflow: hidden;
+	position: absolute;
+	top: 0;
+	left: 440px;
+	display: none;
+}
+
+.container .big-img img {
+	position: absolute;
+}

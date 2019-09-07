@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="node_modules/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+<script>
+  $.ajax({
+    url: 'http://127.0.0.1:5000/api/getheros',
+    type: 'get',
+    dataType: 'json',
+    success: res => {
+      console.log(res);
+    }
+  })
+
+</script>
+</body>
+</html>

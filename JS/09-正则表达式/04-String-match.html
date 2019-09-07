@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  let str = '张三：7000， 李四：8500，王四：9500';
+  let reg = /\d+/g;
+  let lgReg = /[\u4e00-\u9fa5]{2,4}/g;
+  let name = str.match(lgReg);
+  let money = str.match(reg);
+  let arr = [];
+  for (let i = 0; i < name.length; i++) {
+    arr.push({
+      name: name[i],
+      money: money[i]
+    })
+  }
+  console.log(arr);
+
+  let emailStr = '\'123123@xx.com,fangfang@valuedopinions.cn 这是其它内容 286669312@qq.com 2、emailenglish@emailenglish.englishtown.com 286669312@qq.com...\'';
+  let emailReg = /\w+@\w+(\.\w+)+/g;
+  // console.log(emailStr.match(emailReg));
+
+
+</script>
+</body>
+</html>

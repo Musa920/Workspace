@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		div {
+			line-height: 300px;
+			text-align: center;
+		}
+		#container {
+			width: 1000px;
+			background-color: #e4e4e4;
+			margin: 0 auto;
+		}
+		.nav {
+			height: 300px;
+			background-color: #ccc;
+		}
+		.banner {
+			height: 500px;
+			background-color: #skyblue;
+		}
+		.content {
+			height: 700px;
+		}
+		.footer {
+			height: 300px;
+			background-color: #666;
+		}
+		a {
+			display: block;
+			width: 80px;
+			height: 80px;
+			line-height: 80px;
+			text-align: center;
+			text-decoration: none;
+			color: white;
+			position: fixed;
+			right: 20px;
+			bottom: 20px;
+			background-color: navy;
+			display: none;
+		}
+	</style>
+</head>
+<body>
+	<a href="javascript:;" id="link">返回顶部</a>
+	<div id="container">
+		<div class="nav">
+			this is nav
+		</div>
+		<div class="banner">
+			this is banner
+		</div>
+		<div class="content">
+			en....
+		</div>
+		<div class="footer"></div>
+	</div>
+	<script>
+		var bodyBox = document.querySelector("body")
+		var aLink = document.querySelector("#link")
+		var timer = null;
+		window.onscroll = function() {
+			if (document.documentElement.scrollTop > 300) {
+				aLink.style.display = "block";
+			}else {
+				aLink.style.display = "none";
+			}
+		}
+
+		aLink.onclick = function() {
+		    clearInterval(timer);
+		    timer = setInterval(function () {
+		        var leader = document.documentElement.scrollTop;
+		        var step = (0 - leader) / 15;
+		        step = step > 0 ? Math.ceil(step) : Math.floor(step);
+		        leader = leader + step;
+		        document.documentElement.scrollTop = leader;
+		        if (leader === 0) {
+		            clearInterval(timer);
+		        }
+		    }, 15);
+		}
+	</script>
+</body>
+</html>

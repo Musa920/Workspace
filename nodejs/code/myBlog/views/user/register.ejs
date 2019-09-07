@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户注册</title>
+    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/assets/css/login.css">
+    <link rel="stylesheet" href="/node_modules/layui-src/dist/css/layui.css">
+    <script src="/node_modules/axios/dist/axios.min.js"></script>
+    <script src="/node_modules/layui-src/dist/layui.all.js"></script>
+</head>
+<body>
+<form id="form">
+    <h1>注册页面</h1>
+    <div class="form-group">
+        <input type="text" name="username" id="username" class="form-control input-lg" placeholder="用户名" required>
+    </div>
+
+    <div class="form-group">
+        <input type="password" name="password" id="password" class="form-control input-lg" placeholder="密码" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="nickname" id="nickname" class="form-control input-lg" placeholder="昵称" required>
+    </div>
+
+    <div class="form-group">
+        <input type="text" name="email" id="email" class="form-control input-lg" placeholder="邮箱" required>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="注册新用户" class="btn btn-primary btn-lg">
+    </div>
+</form>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    $(function () {
+      $('#form').on('submit', function (ev) {
+        ev.preventDefault();
+        axios.post('http://127.0.0.1:3000/register', $('#form').serialize())
+          .then(result => {
+            if (result.status === 200 && result.data.err_code === 0) {
+              layer.msg(result.data.message + '，请去登录呃！');
+              setTimeout(function () {
+                location.href = '/login';
+              }, 2000);
+            } else if (result.status === 200 && result.data.err_code === 1) {
+              layer.msg(result.data.message);
+            }
+          })
+          .catch(err => {
+            throw err;
+          })
+      })
+    });
+</script>
+</body>
+</html>

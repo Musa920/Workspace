@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person(name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+      // this.sayHi = function () {
+      //   console.log(this.name + '的书')
+      // }
+    }
+
+    Person.prototype.sayHi = function () {
+      console.log('这是' + this.name + '的原型属性');
+    };
+
+    let p1 = new Person('jack', 26, 'mane');
+    let p2 = new Person('jeckson', 27, 'women');
+    console.log(p1.sayHi() === p2.sayHi());
+
+    console.log(Person.prototype);
+    console.log(p1.__proto__ === Person.prototype);
+    console.log(Object.prototype === p1.__proto__.__proto__);
+</script>
+</body>
+</html>

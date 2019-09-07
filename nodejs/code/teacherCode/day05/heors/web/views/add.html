@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.min.css">
+  <script src="/node_modules/jquery/dist/jquery.min.js"></script>
+  <!-- 在浏览器端使用 axios 来发起Ajax请求 -->
+  <script src="/node_modules/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <h1>
+      <a href="/">亡者农药</a>
+      <small>添加新英雄</small>
+    </h1>
+    <hr>
+
+    <form id="form">
+
+      <div class="form-group">
+        <label>名称：</label>
+        <input type="text" name="name" class="form-control">
+      </div>
+
+      <div class="form-group">
+        <label>性别：</label>
+        <label>
+          <input type="radio" name="gender" value="男" checked>男</label>
+        <label>
+          <input type="radio" name="gender" value="女">女</label>
+      </div>
+
+      <input type="submit" value="添加新英雄" class="btn btn-primary">
+
+    </form>
+
+  </div>
+
+  <script>
+    $(function () {
+
+      // 使用 Jquery 中的 Ajax 来提交Post表单
+      /* $('#form').on('submit', function (e) {
+        // 阻止表单的默认提交
+        e.preventDefault()
+
+        $.ajax({
+          url: 'http://127.0.0.1:5000/api/addhero',
+          data: $('form').serialize(),
+          type: 'post',
+          dataType: 'json',
+          success: function (data) {
+            if (data.err_code === 0) {
+              location.href = '/'
+            } else {
+              alert('添加失败！')
+            }
+          }
+        })
+      }) */
+
+
+
+      $('#form').on('submit', function (e) {
+        e.preventDefault()
+
+        axios.post('http://127.0.0.1:5000/api/addhero', $('form').serialize()).then(function (results) {
+          if (results.status === 200 && results.data.err_code === 0) {
+            location.href = '/'
+          } else {
+            alert('添加失败')
+          }
+        })
+
+        // 昨天自己模拟了一下解析表单Post数据的中间件     id=10&name=zs
+      })
+
+
+
+
+    })
+  </script>
+</body>
+
+</html>

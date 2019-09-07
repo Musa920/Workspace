@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  let arr = [4, 6, 3, 2];
+  /*给数组原型增加方法的时候只能用这个方式*/
+  Array.prototype.getEvenSum = function () {
+    /*求数组中所有数的和*/
+    let sum = 0;
+    this.forEach(item => {
+      if (item % 2 === 0) {
+        sum += item
+      }
+    });
+    console.log(this);
+    return sum;
+  };
+
+
+  //这个方法是不行，因为重新设置属性的话原型对象里面的方法都会被覆盖，等于0的
+  // Array.prototype = {
+  //   constructor: Array,
+  //   getEvenSum (){
+  //     // this.forEach(item => {
+  //     //   console.log(item)
+  //     // })
+  //   }
+  // };
+
+
+
+  console.log(arr.getEvenSum());
+  console.log(arr.constructor === Array);
+
+</script>
+</body>
+</html>

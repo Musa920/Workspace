@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  /*
+  * 浅拷贝：一个对象复制给另一个对象的时候只会复制第一层的简单类型的属性，不会复制复杂类型的属性；
+  * 因为方法也是复杂类型，在内存中开辟一个新的区域，然后复制的时候新的对象只是引用它的地址而已；
+  * 如果第一个对象中的方法改变的话第二个对象中的方法也会随着改变；
+  * */
+
+  var obj1 = {
+    name: 'jack',
+    age: 26,
+    sex: 'man',
+    eat: {
+      name: 'child-jack'
+    }
+  };
+
+  var obj2 = {
+    name: 'jackson'
+  };
+
+  function copyObj(obj1, obj2) {
+    for (var key in obj1) {
+      if (!obj2.hasOwnProperty(key)) {
+        obj2[key] = obj1[key];
+      }
+    }
+  }
+
+  obj1.eat.name = 'jack-child';
+
+  copyObj(obj1, obj2);
+  console.log(obj1.eat === obj2.eat); //true
+
+</script>
+</body>
+</html>

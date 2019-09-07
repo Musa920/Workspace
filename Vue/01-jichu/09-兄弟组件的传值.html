@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <family></family>
+  </div>
+  <script>
+    let eventBus = new Vue()
+
+    Vue.component('family', {
+      template: `
+        <div>
+          <husband></husband>
+          <wife></wife>
+        </div>
+      `,
+      components: {
+        husband: {
+          template: `
+            <span>我老婆名字叫{{wifeName}}</span>
+          `,
+          data() {
+            return {
+              wifeName: ''
+            }
+          },
+          mounted() {
+            eventBus.$on('tellHusbandMyName', name => {
+              this.wifeName = name
+            })
+          }
+        },
+        wife: {
+          data() {
+            return {
+              myName: 'Henay'
+            }
+          },
+          template: `
+            <button @click="emitMyName">我告诉你老公，我名字叫{{myName}}</button>
+          `,
+          methods: {
+            emitMyName() {
+              eventBus.$emit('tellHusbandMyName', this.myName)
+            }
+          }
+        }
+      }
+    })
+
+    var vm = new Vue({
+      el: '#app',
+      data: {
+      },
+      methods: {
+      }
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul id="list">
+  <li>拌面</li>
+  <li>抓饭</li>
+  <li>包子</li>
+</ul>
+
+<script>
+  function loadTree(parent, callback) {
+    for (let i = 0; i < parent.children.length; i++) {
+      let child = parent.children[i];
+      callback && callback(child);
+      loadTree(child);
+    }
+  }
+
+  let ul = document.getElementById('list');
+  console.log(ul);
+  loadTree(ul, function (item) {
+    item.onclick = function () {
+      console.log(this.innerText);
+    }
+  });
+
+</script>
+</body>
+</html>
