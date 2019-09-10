@@ -1,21 +1,12 @@
 const Router = require('koa-router');
 const router = new Router();
-const { ParameterException } = require('../../../core/http-exception');
-router.post('/v1/:id/classic/latest', (ctx, next) => {
+const { PositiveIntegerValidator } = require('../../validators/validator');
+router.post('/v1/:id/classic/latest', async (ctx, next) => {
   const path = ctx.params;
   const query = ctx.request.query;
   const headers = ctx.request.header;
   const body = ctx.request.body;
-
-  if (true) {
-    const error = new ParameterException;
-    throw error;
-  }
-
-  // ctx.body = {
-  //   name: 'classic',
-  //   age: 22
-  // }; 
+  const v = await new PositiveIntegerValidator().validate(ctx);
 });
 
 module.exports = router;
