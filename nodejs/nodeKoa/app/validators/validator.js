@@ -68,13 +68,16 @@ class RegisterValidator extends LinValidator {
 class TokenValidator extends LinValidator {
     constructor() {
         super();
+        // 账号
         this.account = [
             new Rule('isLength', '不符合账号规则', {
                 min: 4,
                 max: 32
             })
         ];
+        // 密码
         this.secret = [
+            // isOptional 是验证密码为空或不为空的验证函数
             new Rule('isOptional'),
             new Rule('isLength', '至少6个字符', {
                 min: 6,

@@ -7,9 +7,10 @@ class InitManager {
     this.app = app;
     this.loadConfig();
     this.initLoadRouters();
+    this.loadHttpException();
   }
 
-  static loadConfig(path = '') { 
+  static loadConfig(path = '') {
     const configPath = path || `${process.cwd()}/config/config`;
     const config = require(configPath);
     global.config = config;
@@ -24,6 +25,11 @@ class InitManager {
         }
       }
     })
+  }
+
+  static loadHttpException() {
+    const errors = require('./http-exception')
+    global.errs = errors
   }
 }
 
