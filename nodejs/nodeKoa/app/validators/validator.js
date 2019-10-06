@@ -6,7 +6,8 @@ const {
 const { User } = require('../models/user');
 
 const {
-    LoginType
+    LoginType,
+    ArtType
 } = require('../lib/enum');
 
 class PositiveIntegerValidator extends LinValidator {
@@ -84,8 +85,6 @@ class TokenValidator extends LinValidator {
                 max: 128
             })
         ];
-
-       
     }
 
     validateLoginType(vals) {
@@ -98,8 +97,87 @@ class TokenValidator extends LinValidator {
     }
 }
 
+class NotEmptyValidator extends LinValidator {
+    constructor() {
+        super()
+        this.token = [
+            new Rule('isLength', '不允许为空', {
+                min: 1
+            })
+        ]
+    }
+}
+
+function checkArtType(vals) {
+    let type = vals.body.type || vals.path.type
+    if (!type) {
+        throw new Error('type是必须参数')
+    }
+    type = parseInt(type)
+
+    if (!ArtType.isThisType(type)) {
+        throw new Error('type参数不合法')
+    }
+}
+
+class LikeValidator extends PositiveIntegerValidator {
+    constructor() {
+        super()
+        this.validateType = checkArtType;
+    }
+}
+
+class ClassicValidator extends LikeValidator {
+
+}
+
+class SearchValidator extends LinValidator {
+    constructor() {
+        super();
+        this.q = [
+            new Rule('isLength', '搜索关键字不能为空', {
+                min: 1,
+                max: 16
+            })
+        ]
+
+        this.start = [
+            new Rule('isInt', '不符合规范', {
+                min: 0,
+                max: 60000
+            }),
+            new Rule('isOptional', '', 0)
+        ]
+
+        this.count = [
+            new Rule('isInt', '不符合规范', {
+                min: 1,
+                max: 20
+            }),
+            new Rule('isOptional', '', 20)
+        ]
+    }
+}
+
+class AddShortCommentValidator extends PositiveIntegerValidator {
+    constructor() {
+        super();
+        this.content = [
+            new Rule('isLength', '必须在1~20字符之间', {
+                min: 1,
+                max: 20
+            })
+        ]
+    }
+}
+
 module.exports = {
     PositiveIntegerValidator,
     RegisterValidator,
-    TokenValidator
+    TokenValidator,
+    NotEmptyValidator,
+    LikeValidator,
+    ClassicValidator,
+    SearchValidator,
+    AddShortCommentValidator
 };

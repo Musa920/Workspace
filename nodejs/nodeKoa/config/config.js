@@ -12,8 +12,13 @@ module.exports = {
     expiresIn: 60 * 60 * 24 * 30
   },
   wx: {
-    appId: 'wx96170aa09c0a102d',
-    appSecret: '034a19911c4b009e11e272d9b26e5d6c',
+    appId: 'wxa074043f776828c5',
+    appSecret: '91b1f01ba1068348027ad3f029f449b9',
     loginUrl: 'https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code'
   },
+  yushu: {
+    detailUrl: 'http://t.yushu.im/v2/book/id/%s',
+    keywordUrl: 'http://t.yushu.im/v2/book/search?q=%s&count=%s&start=%s&summary=%s'
+  },
+  host: 'http://localhost:3000/'
 };

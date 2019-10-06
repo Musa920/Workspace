@@ -35,5 +35,10 @@
   ],
   "author": "7yue",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {},
+  "_moduleAliases": {
+    "@root": ".",
+    "@models": "app/models",
+    "@validator": "app/validators/validator.js"
+  }
 }
